@@ -22,12 +22,22 @@ const main = function () {
   //     console.log(items);
   //   });
 
-  api.getItems()
-    .then(res => res.json())
-    .then((items) => {
-      items.forEach((item) => store.addItem(item));
-      shoppingList.render();
-    });
+  // api.getItems()
+  //   .then(res => res.json())
+  //   .then((items) => {
+  //     items.forEach((item) => store.addItem(item));
+  //     shoppingList.render();
+  //   });
+
+  // api.getItems()
+  //   .then(res => res.json()) // 
+  //   .then((items) => {
+  //     console.log(items);
+  //     const item = items[0];
+  //     return api.updateItem(item.id, { name: 'foobar' });
+  //   })
+  //   .then(res => res.json())
+  //   .then(() => console.log('updated!'));
 
   shoppingList.bindEventListeners();
   shoppingList.render();
