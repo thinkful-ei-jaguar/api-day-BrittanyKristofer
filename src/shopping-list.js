@@ -81,7 +81,6 @@ const handleDeleteItemClicked = function () {
     // get the index of the item in store.items
     const id = getItemIdFromElement(event.currentTarget);
     api.deleteItem(id)
-      .then(res => res.json())
       .then(() => {
         store.findAndDelete(id);
         render();
@@ -96,7 +95,6 @@ const handleEditShoppingItemSubmit = function () {
     const itemName = $(event.currentTarget).find('.shopping-item').val();
     // store.findAndUpdateName(id, itemName);
     api.updateItem(id, { name: itemName })
-      .then(res => res.json())
       .then((newItem) => {
         console.log(`newItem: ${newItem}`)
         store.findAndUpdate(id, newItem);
@@ -110,7 +108,6 @@ const handleItemCheckClicked = function () {
     const id = getItemIdFromElement(event.currentTarget);
     const item = store.findById(id);
     api.findAndUpdate(id, { checked: !item.checked })
-      .then(res => res.json())
       .then(() => {
         store.findAndUpdate(id, { name: item.name });
         render();
