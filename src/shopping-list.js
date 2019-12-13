@@ -56,7 +56,6 @@ const handleNewItemSubmit = function () {
     event.preventDefault();
     const newItemName = $('.js-shopping-list-entry').val();
     api.createItem(newItemName) // add item to our backend api
-      .then(res => res.json()) // convert JSON to JS Object
       .then((newItemName) => { // then add item to our local store 
         store.addItem(newItemName);
         render();
@@ -85,6 +84,10 @@ const handleDeleteItemClicked = function () {
         store.findAndDelete(id);
         render();
       })
+      .catch(e => {
+        store.setError(e.message);
+        render();
+      })
   });
 };
 
@@ -100,6 +103,10 @@ const handleEditShoppingItemSubmit = function () {
         store.findAndUpdate(id, newItem);
         render();
       })
+      .catch(e => {
+        store.setError(e.message);
+        render();
+      })
   });
 };
 
@@ -107,9 +114,13 @@ const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
     const item = store.findById(id);
-    api.findAndUpdate(id, { checked: !item.checked })
+    api.updateItem(id, { checked: !item.checked })
       .then(() => {
         store.findAndUpdate(id, { name: item.name });
+        render();
+      })
+      .catch(e => { // this will run when?? 
+        store.setError(e.message);
         render();
       })
   });

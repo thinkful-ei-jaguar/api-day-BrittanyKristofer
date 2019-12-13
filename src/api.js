@@ -2,6 +2,7 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/Brittany';
 
 
+// handle errors where an e is not thrown 
 const listApiFetch = (...args) => { // The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
     let error = null;
     fetch(...args)
